@@ -20,9 +20,21 @@ spec:
         image: localhost:5001/muchtodo-backend:latest
         ports:
         - containerPort: 8080
+        volumeMounts:
+          - name: env-volume
+            mountPath: /app/.env
+            subPath: .env
+            readOnly: true
+        # volumes:
+        #   - ./Server/MuchToDo/.env:/app/.env:ro
         env:
-        - name: MONGODB_URI
-          value: "mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb.muchtodo.svc.cluster.local:27017/muchtodo?authSource=admin"
+        # - name: MONGODB_URI
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: backend-config
+        #       key: MONGODB_URI
+        # - name: MONGODB_URI
+        #   value: "mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb.muchtodo.svc.cluster.local:27017/muchtodo?authSource=admin"
         - name: MONGODB_USERNAME
           valueFrom:
             secretKeyRef:
@@ -68,3 +80,8 @@ spec:
           runAsNonRoot: true
           runAsUser: 1001
           allowPrivilegeEscalation: false
+      volumes:
+        - name: env-volume
+          hostPath:
+            path: ./Server/MuchToDo/.env  # The absolute path to your .env file on the local machine
+            type: File

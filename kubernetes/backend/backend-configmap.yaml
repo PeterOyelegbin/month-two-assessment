@@ -6,3 +6,4 @@ metadata:
 data:
   PORT: "8080"
   LOG_LEVEL: "info"
+  MONGODB_URI: mongodb://muchtodo_user:muchtodo_pass@mongodb.muchtodo.svc.cluster.local:27017/muchtodo?authSource=admin

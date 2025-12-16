@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: mongodb
-        image: mongo:6.0
+        image: mongo:4.4
         ports:
         - containerPort: 27017
         env:
@@ -49,7 +49,7 @@ spec:
         readinessProbe:
           exec:
             command:
-            - mongosh
+            - mongo
             - --eval
             - "db.adminCommand('ping')"
           initialDelaySeconds: 30
@@ -58,7 +58,7 @@ spec:
         livenessProbe:
           exec:
             command:
-            - mongosh
+            - mongo
             - --eval
             - "db.adminCommand('ping')"
           initialDelaySeconds: 45
