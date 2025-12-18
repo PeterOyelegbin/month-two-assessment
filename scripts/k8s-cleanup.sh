@@ -15,4 +15,8 @@ echo "Stopping local registry..."
 sudo docker stop kind-registry
 sudo docker rm kind-registry
 
+echo "Removing orphan containers and unused volumes"
+sudo docker system prune -a
+sudo docker system prune --volumes
+
 echo "Cleanup completed!"

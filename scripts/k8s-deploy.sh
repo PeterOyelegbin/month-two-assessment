@@ -26,6 +26,12 @@ echo "Building and pushing application image..."
 echo "Deploying backend application..."
 kubectl apply -f kubernetes/backend
 
+echo "Creating a Secret from your .env file"
+kubectl create secret generic backend-env --from-file=.env=/home/peteroyelegbin/Documents/month-two-assessment/Server/MuchToDo/.env -n muchtodo
+
+echo "Installing NGINX Ingress Controller for kind"
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+
 echo "Deploying ingress..."
 kubectl apply -f kubernetes/ingress.yaml
 

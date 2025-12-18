@@ -15,6 +15,8 @@ spec:
       labels:
         app: mongodb
     spec:
+      securityContext:
+        fsGroup: 999
       containers:
       - name: mongodb
         image: mongo:4.4
@@ -25,12 +27,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mongodb-secret
-              key: mongodb-root-username
+              key: mongodb-username
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mongodb-secret
-              key: mongodb-root-password
+              key: mongodb-password
         - name: MONGO_INITDB_DATABASE
           valueFrom:
             configMapKeyRef:
