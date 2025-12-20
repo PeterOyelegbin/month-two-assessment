@@ -12,11 +12,11 @@ echo "Deleting Kind cluster..."
 kind delete cluster --name muchtodo-cluster
 
 echo "Stopping local registry..."
-sudo docker stop kind-registry
-sudo docker rm kind-registry
+docker stop kind-registry
+docker rm kind-registry
 
 echo "Removing orphan containers and unused volumes"
-sudo docker system prune -a
-sudo docker system prune --volumes
+docker system prune -a
+docker system prune --volumes
 
 echo "Cleanup completed!"

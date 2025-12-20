@@ -30,9 +30,18 @@ git clone https://github.com/PeterOyelegbin/month-two-assessment.git
 
 ## Kubernetes Deployment
 1. Run: `./scripts/k8s-deploy.sh`
-   ![k8s_deploy](./evidence/k8s-deploy.png)
-2. Access: http://localhost
-   ![k8s_deploy_app_response](./evidence/k8s-deploy-app-response.png)
+   - Kind cluster creation
+   ![kind_cluster_creation](./evidence/kind-cluster-creation.png)
+   - Kubernetes deployments running
+   ![k8s_deploy_1](./evidence/k8s-deployments-running-1.png)
+   ![k8s_deploy_2](./evidence/k8s-deployments-running-2.png)
+   ![k8s_deploy_3](./evidence/k8s-deployments-running-3.png)
+2. Application accessible through a NodePort Service type to the host or Kubernetes ingress
+   ![k8s_deploy_app_response](./evidence/application-accessible.png)
+3. Kubectl commands showing pod status, services, and ingress
+   ![kubectl_pod_status_services_ingress.png](./evidence/kubectl-pod-status-services-ingress.png)
+
+For detailed script flow execution read [Documentation](./Documentation.md)
 
 ---
 
@@ -61,4 +70,4 @@ git clone https://github.com/PeterOyelegbin/month-two-assessment.git
 ---
 
 ## Environment Variables
-See `docker-compose.yml` and Kubernetes configs for environment configuration.
+See `docker-compose.yml`, Kubernetes configs and secrets for environment configuration.
