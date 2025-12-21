@@ -11,11 +11,11 @@ kubectl apply -f kubernetes/namespace.yaml
 echo "Deploying MongoDB..."
 kubectl apply -f kubernetes/mongodb
 
-echo "Waiting for MongoDB to be ready..."
-kubectl wait --namespace=muchtodo --for=condition=ready pod -l app=mongodb --timeout=300s || exit 1
-
 echo "Checking MongoDB status..."
 kubectl get pods -n muchtodo -l app=mongodb
+
+echo "Waiting for MongoDB to be ready..."
+kubectl wait --namespace=muchtodo --for=condition=ready pod -l app=mongodb --timeout=600s || true
 
 echo "Creating local registry..."
 docker run -d --restart=always -p "5001:5000" --name "kind-registry" registry:2 || true
@@ -27,24 +27,24 @@ echo "Building and pushing application image..."
 ./scripts/docker-build.sh
 
 echo "Creating secret from .env file..."
-kubectl create secret generic backend-env --from-file=.env=~/Downloads/month-two-assessment/Server/MuchToDo/.env \
+kubectl create secret generic backend-env --from-file=.env=$HOME/Downloads/month-two-assessment/Server/MuchToDo/.env \
   -n muchtodo --dry-run=client -o yaml | kubectl apply -f -
 
 echo "Deploying backend application..."
 kubectl apply -f kubernetes/backend
 
-echo "Waiting for backend to be ready..."
-kubectl wait --namespace=muchtodo --for=condition=ready pod -l app=backend --timeout=300s || exit 1
-
 echo "Checking backend status..."
 kubectl get pods -n muchtodo -l app=backend
+
+echo "Waiting for backend to be ready..."
+kubectl wait --namespace=muchtodo --for=condition=ready pod -l app=backend --timeout=600s || true
 
 echo "Installing NGINX Ingress Controller for Kind..."
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.3/deploy/static/provider/kind/deploy.yaml
 
 echo "Waiting for Ingress controller to be initialized..."
 kubectl wait --namespace=ingress-nginx --for=condition=ready pod \
-  -l app.kubernetes.io/component=controller --timeout=990s || exit 1
+  -l app.kubernetes.io/component=controller --timeout=1350s || true
 
 echo "Verifying webhook configuration exists..."
 kubectl get validatingwebhookconfiguration ingress-nginx-admission

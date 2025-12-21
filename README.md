@@ -33,9 +33,9 @@ git clone https://github.com/PeterOyelegbin/month-two-assessment.git
    - Kind cluster creation
    ![kind_cluster_creation](./evidence/kind-cluster-creation.png)
    - Kubernetes deployments running
-   ![k8s_deploy_1](./evidence/k8s-deployments-running-1.png)
-   ![k8s_deploy_2](./evidence/k8s-deployments-running-2.png)
-   ![k8s_deploy_3](./evidence/k8s-deployments-running-3.png)
+   ![k8s_deploy_start](./evidence/k8s-deployments-running-1.png)
+   ![k8s_deploy_midway](./evidence/k8s-deployments-running-2.png)
+   ![k8s_deploy_finish](./evidence/k8s-deployments-running-3.png)
 2. Application accessible through a NodePort Service type to the host or Kubernetes ingress
    ![k8s_deploy_app_response](./evidence/application-accessible.png)
 3. Kubectl commands showing pod status, services, and ingress
@@ -52,6 +52,8 @@ For detailed script flow execution read [Documentation](./Documentation.md)
    `sudo docker system prune -af`
 3. Kubernetes:
    `./scripts/k8s-cleanup.sh`
+   ![k8s_cleanup_process_start](./evidence/k8s-cleanup-process-1.png)
+   ![k8s_cleanup_process_finish](./evidence/k8s-cleanup-process-2.png)
 
 ---
 
