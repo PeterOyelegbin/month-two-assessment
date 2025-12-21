@@ -73,4 +73,3 @@ For detailed script flow execution read [Documentation](./Documentation.md)
 
 ## Environment Variables
 See `docker-compose.yml`, Kubernetes configs and secrets for environment configuration.
-
