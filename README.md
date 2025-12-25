@@ -19,26 +19,36 @@ git clone https://github.com/PeterOyelegbin/month-two-assessment.git
 ---
 
 ## Docker Development
-1. Run: `./scripts/docker-build.sh`
+1. copy `.env.example` to `.env`, then update the content accordingly
+   ```bash
+   cp Server/MuchToDo/.env.example Server/MuchToDo/.env
+   ```
+2. Run: `./scripts/docker-build.sh`
    ![docker_build](./evidence/docker-build.png)
-2. Run: `./scripts/docker-run.sh`
+3. Run: `./scripts/docker-run.sh`
    ![docker_compose](./evidence/docker-compose.png)
-3. Access: http://localhost:8080/swagger/index.html
+4. Access: http://localhost:8080/swagger/index.html
    ![docker_compose_app_response](./evidence/docker-compose-app-response.png)
 
 ---
 
 ## Kubernetes Deployment
-1. Run: `./scripts/k8s-deploy.sh`
+1. Ensure `step 1` from `Docker Developement` above has been done, if not repeat the step
+2. Update the env path in `k8s-deploy.sh`
+   ```bash
+   kubectl create secret generic backend-env --from-file=.env=<path-to-your-env> \
+      -n muchtodo --dry-run=client -o yaml | kubectl apply -f -
+   ```
+3. Run: `./scripts/k8s-deploy.sh`
    - Kind cluster creation
    ![kind_cluster_creation](./evidence/kind-cluster-creation.png)
    - Kubernetes deployments running
    ![k8s_deploy_start](./evidence/k8s-deployments-running-1.png)
    ![k8s_deploy_midway](./evidence/k8s-deployments-running-2.png)
    ![k8s_deploy_finish](./evidence/k8s-deployments-running-3.png)
-2. Application accessible through a NodePort Service type to the host or Kubernetes ingress
+4. Application accessible through a NodePort Service type to the host or Kubernetes ingress
    ![k8s_deploy_app_response](./evidence/application-accessible.png)
-3. Kubectl commands showing pod status, services, and ingress
+5. Kubectl commands showing pod status, services, and ingress
    ![kubectl_pod_status_services_ingress.png](./evidence/kubectl-pod-status-services-ingress.png)
 
 For detailed script flow execution read [Documentation](./Documentation.md)
